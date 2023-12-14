@@ -15,6 +15,7 @@ limitations under the License.
 
 Original Author: Shay Gal-on
 */
+#define ITERATIONS 35
 /* Topic : Description
         This file contains configuration constants required to execute on
    different platforms
@@ -28,7 +29,7 @@ Original Author: Shay Gal-on
         Define to 1 if the platform supports floating point.
 */
 #ifndef HAS_FLOAT
-#define HAS_FLOAT 1
+#define HAS_FLOAT 0
 #endif
 /* Configuration : HAS_TIME_H
         Define to 1 if platform has the time.h header file,
@@ -70,7 +71,7 @@ Original Author: Shay Gal-on
 #endif
 #ifndef COMPILER_FLAGS
 #define COMPILER_FLAGS \
-    FLAGS_STR /* "Please put compiler flags here (e.g. -o3)" */
+        "-march=rv32i_zicsr -mabi=ilp32" /* "Please put compiler flags here (e.g. -o3)" */
 #endif
 #ifndef MEM_LOCATION
 #define MEM_LOCATION "STACK"
@@ -84,6 +85,8 @@ Original Author: Shay Gal-on
         ee_ptr_int needs to be the data type used to hold pointers, otherwise
    coremark may fail!!!
 */
+#include <stddef.h>
+
 typedef signed short   ee_s16;
 typedef unsigned short ee_u16;
 typedef signed int     ee_s32;

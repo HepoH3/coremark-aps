@@ -662,7 +662,10 @@ ee_vsprintf(char *buf, const char *fmt, va_list args)
 void
 uart_send_char(char c)
 {
-#error "You must implement the method uart_send_char to use this file!\n";
+    ee_u8 *uart_ptr = (ee_u8 *)0x06000000;
+    while(*(uart_ptr+0x08));
+    *uart_ptr = c;
+    while(*(uart_ptr+0x08));
     /*	Output of a char to a UART usually follows the following model:
             Wait until UART is ready
             Write char to UART
