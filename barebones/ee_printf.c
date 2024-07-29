@@ -662,7 +662,7 @@ ee_vsprintf(char *buf, const char *fmt, va_list args)
 void
 uart_send_char(char c)
 {
-    ee_u8 *uart_ptr = (ee_u8 *)0x06000000;
+    volatile ee_u8 *uart_ptr = (ee_u8 *)0x06000000;
     while(*(uart_ptr+0x08));
     *uart_ptr = c;
     while(*(uart_ptr+0x08));

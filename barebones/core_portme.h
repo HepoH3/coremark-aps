@@ -15,7 +15,7 @@ limitations under the License.
 
 Original Author: Shay Gal-on
 */
-#define ITERATIONS 45
+#define ITERATIONS 1
 /* Topic : Description
         This file contains configuration constants required to execute on
    different platforms

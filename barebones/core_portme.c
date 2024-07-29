@@ -44,7 +44,7 @@ volatile ee_s32 seed5_volatile = 0;
 CORETIMETYPE
 barebones_clock()
 {
-    ee_u32 *ptr = (ee_u32 *)0x08000000;
+    volatile ee_u32 *ptr = (ee_u32 *)0x08000000;
     ee_u32 tim = *ptr;
     return tim;
 }
@@ -131,7 +131,7 @@ ee_u32 default_num_contexts = 1;
 void
 portable_init(core_portable *p, int *argc, char *argv[])
 {
-    ee_u32 *uart_tx_ptr = (ee_u32 *)0x06000000;
+    volatile ee_u32 *uart_tx_ptr = (ee_u32 *)0x06000000;
     *(uart_tx_ptr + 3) = 115200;
     *(uart_tx_ptr + 4) = 1;
     *(uart_tx_ptr + 5) = 1;
