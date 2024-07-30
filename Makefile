@@ -10,7 +10,7 @@ ifndef src
 src = core_main.o
 endif
 
-OBJS = $(src) startup.o core_list_join.o core_matrix.o core_portme.o core_state.o core_util.o cvt.o ee_printf.o
+OBJS = $(src) core_list_join.o core_matrix.o core_state.o core_util.o barebones/core_portme.o barebones/startup.o barebones/cvt.o barebones/ee_printf.o
 
 
 LINK_SCRIPT = linker_script.ld
@@ -18,17 +18,14 @@ OUTPUT      = coremark
 OUTPUT_PROD = $(addprefix $(OUTPUT), .mem _instr.mem _data.mem .elf _disasm.S)
 # OUTPUT_PROD :=$(OUTPUT_PROD) $(addprefix tb_$(OUTPUT), .mem _instr.mem _data.mem .elf _disasm.S)
 
-INC_DIRS    = "./"
+INC_DIRS    = $(addprefix "-I", ./barebones ./)
 SRC_DIR     = ./src
-CC_FLAGS    = -march=rv32i_zicsr -mabi=ilp32 -I$(INC_DIRS)
+CC_FLAGS    = -march=rv32i_zicsr -mabi=ilp32 $(INC_DIRS)
 LD_FLAGS    = -Wl,--gc-sections -nostartfiles -T $(LINK_SCRIPT)
 
 .PHONY: all setup clean clean_all size harvard princeton
 
-all: clean setup harvard
-
-setup:
-	cp barebones/*.c barebones/*.h ./
+all: clean harvard
 
 harvard: $(OUTPUT).elf $(OUTPUT)_disasm.S size
 # $< означает "первая зависимость"

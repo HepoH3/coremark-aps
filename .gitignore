@@ -1,3 +1,4 @@
 *.mem
 *_disasm.S
 *.elf
+*.o
